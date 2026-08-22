@@ -35,17 +35,19 @@ export function clearAllCached() {
 export async function cachedFetch<T>(
   key: string,
   ttlMs: number,
-  fetcher: () => Promise<T>,
-): Promise<T> {
+  fetcher: () => Promise<T | null>,
+): Promise<T | null> {
   const hit = getCached<T>(key);
   if (hit !== undefined) {
     // Serve the cached copy immediately, refresh the cache in the background.
     fetcher()
-      .then((data) => setCached(key, data, ttlMs))
+      .then((data) => {
+        if (data != null) setCached(key, data, ttlMs);
+      })
       .catch(() => {});
     return hit;
   }
-  const data = await fetcher();
-  setCached(key, data, ttlMs);
+  const data = await fetcher().catch(() => null);
+  if (data != null) setCached(key, data, ttlMs);
   return data;
 }

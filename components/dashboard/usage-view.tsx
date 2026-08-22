@@ -3,7 +3,7 @@
 // The Usage page: a requests-per-day line chart on top, then the paginated
 // table of recent calls. Data loads client-side from /api/usage (cached) so
 // navigation stays instant.
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -16,9 +16,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { LineChart } from "@/components/dashboard/line-chart";
-import { cachedFetch } from "@/lib/client-cache";
 import { formatBytes, formatDateTime } from "@/lib/format";
 import { useDelayedSkeleton } from "@/hooks/use-delayed-skeleton";
+import { useCachedData } from "@/hooks/use-cached-data";
 
 type UsageRow = {
   id: number;
@@ -40,15 +40,15 @@ type UsageResponse = {
 };
 
 export function UsageView() {
-  const [data, setData] = useState<UsageResponse | null>(null);
   const [page, setPage] = useState(1);
   const showSkeleton = useDelayedSkeleton();
-
-  useEffect(() => {
-    void cachedFetch<UsageResponse>(`usage:${page}`, 30_000, () =>
+  const { data, failed, retry } = useCachedData<UsageResponse>(
+    `usage:${page}`,
+    30_000,
+    () =>
       fetch(`/api/usage?page=${page}`).then((r) => (r.ok ? r.json() : null)),
-    ).then(setData);
-  }, [page]);
+    [page],
+  );
 
   return (
     <div className="space-y-8">
@@ -57,7 +57,22 @@ export function UsageView() {
         <p className="mt-1 text-sm text-muted-foreground">Recent API calls.</p>
       </div>
 
-      {!data ? (
+      {failed ? (
+        <div className="border bg-card py-16 text-center">
+          <p className="text-sm font-medium">Couldn&apos;t load your usage</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Something went wrong while fetching your calls. Try again.
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-4"
+            onClick={retry}
+          >
+            Retry
+          </Button>
+        </div>
+      ) : !data ? (
         showSkeleton ? (
           <div className="overflow-hidden border bg-card">
             <Table>

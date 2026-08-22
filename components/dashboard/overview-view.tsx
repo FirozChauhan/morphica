@@ -3,7 +3,6 @@
 // The Overview page. It's a client component that fetches /api/stats after
 // mounting — the page shell renders instantly (skeleton → content) so clicking
 // between dashboard tabs feels snappy, and cachedFetch keeps re-visits fast.
-import { useEffect, useState } from "react";
 import { Activity, ArrowDownRight, Image } from "lucide-react";
 
 import {
@@ -12,21 +11,47 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDelayedSkeleton } from "@/hooks/use-delayed-skeleton";
-import { cachedFetch } from "@/lib/client-cache";
+import { useCachedData } from "@/hooks/use-cached-data";
 import { formatBytes } from "@/lib/format";
 import type { OverviewStats } from "@/lib/stats";
 
 export function OverviewView() {
-  const [stats, setStats] = useState<OverviewStats | null>(null);
+  const { data: stats, failed, retry } = useCachedData<OverviewStats>(
+    "stats",
+    60_000,
+    () => fetch("/api/stats").then((r) => (r.ok ? r.json() : null)),
+  );
   const showSkeleton = useDelayedSkeleton();
 
-  useEffect(() => {
-    void cachedFetch<OverviewStats>("stats", 60_000, () =>
-      fetch("/api/stats").then((r) => (r.ok ? r.json() : null)),
-    ).then(setStats);
-  }, []);
+  if (failed) {
+    return (
+      <div className="space-y-8">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight">Overview</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Usage for the current month.
+          </p>
+        </div>
+        <div className="border bg-card py-16 text-center">
+          <p className="text-sm font-medium">Couldn&apos;t load your stats</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Something went wrong while fetching your usage. Try again.
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-4"
+            onClick={retry}
+          >
+            Retry
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   if (!stats) {
     if (!showSkeleton) {
