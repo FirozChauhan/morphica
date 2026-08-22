@@ -105,7 +105,7 @@ export function SignUpForm() {
   }
 
   return (
-    <div className="w-[30rem] max-w-full border border-border bg-[#0b0b0d] p-6 text-white">
+    <div className="auth-card flex w-[30rem] max-w-full min-h-[28rem] flex-col border border-border p-6 text-white">
       <h1 className="text-lg font-semibold">Create your account</h1>
       <p className="mt-1 text-sm text-muted-foreground">
         {step === "form"
@@ -114,7 +114,10 @@ export function SignUpForm() {
       </p>
 
       {step === "form" ? (
-        <form onSubmit={handleCreate} className="mt-6 space-y-4">
+        <form
+          onSubmit={handleCreate}
+          className="mt-6 flex flex-1 flex-col space-y-4"
+        >
           <label className="block space-y-1.5">
             <span className="text-xs font-medium text-muted-foreground">
               Full name
@@ -161,7 +164,7 @@ export function SignUpForm() {
           <Button
             type="submit"
             disabled={loading || !signUp}
-            className="h-12 w-full gap-1.5 bg-white text-black hover:bg-white/90"
+            className="mt-auto h-12 w-full gap-1.5 bg-white text-black hover:bg-white/90"
           >
             {loading ? <Loader2 className="animate-spin" /> : null}
             Create account
@@ -169,7 +172,10 @@ export function SignUpForm() {
           </Button>
         </form>
       ) : (
-        <form onSubmit={handleVerify} className="mt-6 space-y-4">
+        <form
+          onSubmit={handleVerify}
+          className="mt-6 flex flex-1 flex-col space-y-4"
+        >
           <label className="block space-y-1.5">
             <span className="text-xs font-medium text-muted-foreground">
               Verification code
@@ -195,7 +201,7 @@ export function SignUpForm() {
           <Button
             type="submit"
             disabled={loading || !signUp}
-            className="h-12 w-full gap-1.5 bg-white text-black hover:bg-white/90"
+            className="mt-auto h-12 w-full gap-1.5 bg-white text-black hover:bg-white/90"
           >
             {loading ? <Loader2 className="animate-spin" /> : null}
             Verify &amp; continue

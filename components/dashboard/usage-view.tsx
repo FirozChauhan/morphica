@@ -117,7 +117,7 @@ export function UsageView() {
           </p>
         </div>
       ) : (
-        <div className="animate-in fade-in-0 duration-300 space-y-8">
+        <div className="animate-in space-y-8 fade-in-0 slide-in-from-bottom-3 zoom-in-95 duration-500 ease-out">
           {data.daily.some((d) => d.count > 0) && (
             <LineChart data={data.daily} />
           )}
@@ -180,7 +180,7 @@ export function UsageView() {
             </Table>
           </div>
 
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
+          <div className="flex flex-col items-start gap-3 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <p>
               Page {data.page} of {data.totalPages} · {data.total} calls
             </p>

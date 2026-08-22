@@ -71,7 +71,7 @@ export function OverviewView() {
   const max = Math.max(...stats.daily.map((d) => d.count), 1);
 
   return (
-    <div className="animate-in fade-in-0 duration-300 space-y-8">
+    <div className="animate-in space-y-8 fade-in-0 slide-in-from-bottom-3 zoom-in-95 duration-500 ease-out">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Overview</h1>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -110,7 +110,7 @@ export function OverviewView() {
               {stats.daily.map((d) => (
                 <div
                   key={d.date}
-                  title={`${d.date}: ${d.count}`}
+                  title={`${d.count} request${d.count === 1 ? "" : "s"}`}
                   className="flex-1 rounded-sm bg-brand/60 transition-colors hover:bg-brand"
                   style={{ height: `${Math.max((d.count / max) * 100, 2)}%` }}
                 />
@@ -137,7 +137,7 @@ function StatCard({
   icon: React.ComponentType<{ className?: string }>;
 }) {
   return (
-    <Card>
+    <Card className="transition-colors hover:border-foreground/20">
       <CardHeader className="flex-row items-center gap-2">
         <span className="flex size-7 items-center justify-center bg-brand/10 text-brand">
           <Icon className="size-4" />

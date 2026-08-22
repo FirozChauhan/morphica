@@ -201,7 +201,7 @@ export function KeysClient() {
           </p>
         </div>
       ) : (
-        <div className="animate-in fade-in-0 duration-300 overflow-hidden border bg-card">
+        <div className="animate-in overflow-hidden border bg-card fade-in-0 slide-in-from-bottom-3 zoom-in-95 duration-500 ease-out">
           <Table>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
@@ -321,7 +321,7 @@ export function KeysClient() {
           if (!open) setReveal(null);
         }}
       >
-        <DialogContent>
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>API key created</DialogTitle>
             <DialogDescription>
@@ -329,7 +329,7 @@ export function KeysClient() {
             </DialogDescription>
           </DialogHeader>
           <div className="flex gap-2">
-            <code className="min-w-0 flex-1 overflow-x-auto border bg-muted px-3 py-2 text-xs">
+            <code className="min-w-0 flex-1 break-all border bg-muted px-3 py-2 text-xs">
               {reveal?.plaintext}
             </code>
             <Button variant="outline" size="icon" onClick={copyPlaintext}>

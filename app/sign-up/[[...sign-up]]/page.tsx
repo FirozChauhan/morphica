@@ -1,3 +1,5 @@
+import { ClerkLoaded } from "@clerk/nextjs";
+
 import { AuthHeader } from "@/components/auth/auth-header";
 import { SignUpForm } from "@/components/auth/sign-up-form";
 
@@ -6,7 +8,11 @@ export default function SignUpPage() {
     <main className="flex min-h-dvh flex-col bg-app">
       <AuthHeader />
       <div className="flex flex-1 items-center justify-center px-4 py-10">
-        <SignUpForm />
+        <ClerkLoaded>
+          <div className="animate-in w-[30rem] max-w-full fade-in-0 slide-in-from-bottom-2 duration-300 ease-out">
+            <SignUpForm />
+          </div>
+        </ClerkLoaded>
       </div>
     </main>
   );

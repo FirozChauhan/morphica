@@ -8,14 +8,12 @@ export default function DocsPage() {
   return (
     <main className="min-h-dvh bg-app">
       <div className="bg-black shadow-[0_10px_30px_-6px_color-mix(in_srgb,var(--brand)_25%,transparent)]">
-        <div className="mx-auto flex w-full max-w-[70vw] items-center justify-between px-6 py-6">
-          <Link href="/">
-            <Wordmark className="cursor-pointer text-4xl tracking-[0.08em] text-white" />
-          </Link>
-          <div className="flex items-center gap-6">
+        <div className="mx-auto flex w-full items-center justify-between px-4 py-4 md:max-w-[80vw] md:px-6 md:py-6">
+          <Wordmark className="cursor-pointer text-2xl tracking-[0.08em] text-white md:text-4xl" />
+          <div className="flex items-center gap-4 md:gap-6">
             <Link
               href="/docs"
-              className="text-sm font-medium text-white transition-colors hover:text-white/70"
+              className="hidden text-sm font-medium text-white transition-colors hover:text-white/70 md:inline"
             >
               Docs
             </Link>
@@ -24,7 +22,7 @@ export default function DocsPage() {
         </div>
       </div>
 
-      <div className="mx-auto w-full max-w-3xl px-6 py-14">
+      <div className="mx-auto w-full max-w-3xl px-4 py-10 md:px-6 md:py-14">
         <ApiReference />
       </div>
     </main>

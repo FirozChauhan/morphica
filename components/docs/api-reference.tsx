@@ -97,7 +97,7 @@ export function ApiReference() {
 
       <section>
         <h3 className="text-base font-semibold">Form fields</h3>
-        <div className="mt-3 overflow-hidden border border-border bg-card">
+        <div className="mt-3 overflow-x-auto border border-border bg-card">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border text-left">
@@ -169,7 +169,7 @@ export function ApiReference() {
 
       <section>
         <h3 className="text-base font-semibold">Responses</h3>
-        <div className="mt-3 overflow-hidden border border-border bg-card">
+        <div className="mt-3 overflow-x-auto border border-border bg-card">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border text-left">

@@ -155,7 +155,7 @@ export function Demo() {
 
   return (
     <div
-      className="w-full max-w-[28.8rem] border border-white/10 bg-black p-6 text-white shadow-2xl"
+      className="w-full max-w-[24rem] border border-white/10 bg-black p-6 text-white shadow-2xl"
       onPaste={handlePaste}
     >
       <div className="mb-6 flex items-center justify-between">

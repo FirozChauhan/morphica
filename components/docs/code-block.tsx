@@ -23,7 +23,7 @@ export function CodeBlock({
   }
 
   return (
-    <div className="border border-border bg-black text-white">
+    <div className="max-w-full overflow-x-auto border border-border bg-black text-white">
       <div className="flex items-center justify-between border-b border-white/10 px-4 py-2">
         <span className="text-xs font-medium text-muted-foreground">
           {label}
