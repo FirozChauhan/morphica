@@ -23,5 +23,8 @@ export const config = {
     "/api/stats",
     "/api/usage",
     "/api/demo",
+    // Clerk's Frontend API proxy: on Vercel (vercel.app domains) Clerk serves
+    // its JS/API through /__clerk — the middleware intercepts and forwards it.
+    "/__clerk/:path*",
   ],
 };
