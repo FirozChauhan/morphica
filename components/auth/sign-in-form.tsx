@@ -10,6 +10,7 @@ import { ArrowRight, Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { GoogleButton, OrDivider } from "@/components/auth/google-button";
 
 function errorMessage(err: unknown): string {
   const e = err as { message?: string; longMessage?: string };
@@ -24,6 +25,28 @@ export function SignInForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+
+  // Kick off the Google OAuth flow. The browser is redirected to Google, then
+  // back to /sso-callback (which completes the sign-in), and finally lands on
+  // /dashboard with an active session.
+  async function handleGoogle() {
+    if (!signIn) return;
+    setGoogleLoading(true);
+    setError(null);
+    try {
+      const res = await signIn.sso({
+        strategy: "oauth_google",
+        redirectUrl: "/dashboard",
+        redirectCallbackUrl: "/sso-callback",
+      });
+      if (res.error) throw res.error;
+      // We never get here on success — the browser is being redirected.
+    } catch (err) {
+      setError(errorMessage(err));
+      setGoogleLoading(false);
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -58,49 +81,58 @@ export function SignInForm() {
         Sign in to your account.
       </p>
 
-      <form
-        onSubmit={handleSubmit}
-        className="mt-6 flex flex-1 flex-col space-y-4"
-      >
-        <label className="block space-y-1.5">
-          <span className="text-xs font-medium text-muted-foreground">
-            Email or username
-          </span>
-          <Input
-            required
-            autoFocus
-            placeholder="you@example.com"
-            value={identifier}
-            onChange={(e) => setIdentifier(e.target.value)}
-            className="h-12 border-white/20 bg-transparent text-white shadow-none placeholder:text-white/40 focus-visible:border-white/60 focus-visible:ring-0"
-          />
-        </label>
-        <label className="block space-y-1.5">
-          <span className="text-xs font-medium text-muted-foreground">
-            Password
-          </span>
-          <Input
-            required
-            type="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="h-12 border-white/20 bg-transparent text-white shadow-none placeholder:text-white/40 focus-visible:border-white/60 focus-visible:ring-0"
-          />
-        </label>
+      <div className="mt-6 flex flex-1 flex-col">
+        <GoogleButton
+          onClick={handleGoogle}
+          disabled={!signIn}
+          loading={googleLoading}
+        />
+        <OrDivider />
 
-        {error && <p className="text-sm text-red-400">{error}</p>}
-
-        <Button
-          type="submit"
-          disabled={loading || !signIn}
-          className="mt-auto h-12 w-full gap-1.5 bg-white text-black hover:bg-white/90"
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-1 flex-col space-y-4"
         >
-          {loading ? <Loader2 className="animate-spin" /> : null}
-          Sign in
-          {!loading && <ArrowRight className="size-4" />}
-        </Button>
-      </form>
+          <label className="block space-y-1.5">
+            <span className="text-xs font-medium text-muted-foreground">
+              Email or username
+            </span>
+            <Input
+              required
+              autoFocus
+              placeholder="you@example.com"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
+              className="h-12 border-white/20 bg-transparent text-white shadow-none placeholder:text-white/40 focus-visible:border-white/60 focus-visible:ring-0"
+            />
+          </label>
+          <label className="block space-y-1.5">
+            <span className="text-xs font-medium text-muted-foreground">
+              Password
+            </span>
+            <Input
+              required
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="h-12 border-white/20 bg-transparent text-white shadow-none placeholder:text-white/40 focus-visible:border-white/60 focus-visible:ring-0"
+            />
+          </label>
+
+          {error && <p className="text-sm text-red-400">{error}</p>}
+
+          <Button
+            type="submit"
+            disabled={loading || !signIn}
+            className="mt-auto h-12 w-full gap-1.5 bg-white text-black hover:bg-white/90"
+          >
+            {loading ? <Loader2 className="animate-spin" /> : null}
+            Sign in
+            {!loading && <ArrowRight className="size-4" />}
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }
