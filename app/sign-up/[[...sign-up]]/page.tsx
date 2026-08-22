@@ -1,9 +1,16 @@
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+
 import { ClerkLoaded } from "@clerk/nextjs";
 
 import { AuthHeader } from "@/components/auth/auth-header";
 import { SignUpForm } from "@/components/auth/sign-up-form";
 
-export default function SignUpPage() {
+export default async function SignUpPage() {
+  const { userId } = await auth();
+  // Already signed in? Don't show the sign-up form — go to the dashboard.
+  if (userId) redirect("/dashboard");
+
   return (
     <main className="flex min-h-dvh flex-col bg-app">
       <AuthHeader />

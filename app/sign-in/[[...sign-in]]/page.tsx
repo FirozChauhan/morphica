@@ -1,10 +1,17 @@
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+
 import { ClerkLoaded } from "@clerk/nextjs";
 
 import { AuthHeader } from "@/components/auth/auth-header";
 import { SignInForm } from "@/components/auth/sign-in-form";
 import { SignUpNav } from "@/components/auth/auth-nav";
 
-export default function SignInPage() {
+export default async function SignInPage() {
+  const { userId } = await auth();
+  // Already signed in? Don't show the sign-in form — go to the dashboard.
+  if (userId) redirect("/dashboard");
+
   return (
     <main className="flex min-h-dvh flex-col bg-app">
       <AuthHeader action={<SignUpNav />} />
