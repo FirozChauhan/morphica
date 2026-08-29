@@ -9,18 +9,21 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  preload: false,
 });
 
 const archivoBlack = Archivo_Black({
   variable: "--font-archivo",
   subsets: ["latin"],
   weight: "400",
+  preload: false,
 });
 
 const arefRuqaa = Aref_Ruqaa({
   variable: "--font-aref-ruqaa",
   subsets: ["arabic"],
   weight: "400",
+  preload: false,
 });
 
 export const metadata: Metadata = {
