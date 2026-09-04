@@ -10,7 +10,7 @@ export function SignUpButton() {
     <Button
       size="lg"
       className="h-10 rounded-[4px] bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-accent hover:text-accent-foreground"
-      onClick={() => redirectToSignUp({ redirectUrl: "/dashboard" })}
+      onClick={() => void redirectToSignUp()}
     >
       Sign up
     </Button>
@@ -25,7 +25,7 @@ export function GetStartedButton() {
     <Button
       size="lg"
       className="group h-10 rounded-[4px] bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-      onClick={() => redirectToSignUp({ redirectUrl: "/dashboard" })}
+      onClick={() => void redirectToSignUp()}
     >
       <span className="flex items-center gap-2">
         Get started
@@ -52,7 +52,7 @@ export function SignInButton({
           ? `h-8 px-3 text-xs ${className ?? ""}`
           : `h-12 px-8 text-sm ${className ?? ""}`
       }
-      onClick={() => redirectToSignIn({ redirectUrl: "/dashboard" })}
+      onClick={() => void redirectToSignIn()}
     >
       Sign in
     </Button>
