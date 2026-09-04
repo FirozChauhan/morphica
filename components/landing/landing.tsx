@@ -92,8 +92,14 @@ export function Landing() {
               ))}
             </ul>
             <Link
+              href="/sign-in"
+              className="ml-6 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Sign in
+            </Link>
+            <Link
               href="/sign-up"
-              className="ml-6 flex h-10 items-center gap-2 rounded-[4px] bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex h-10 items-center gap-2 rounded-[4px] bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
             >
               <ArrowUpRight className="size-4" />
               Get started
@@ -320,6 +326,9 @@ export function Landing() {
           </Link>
           <Link href="/dashboard" className="transition-colors hover:text-foreground">
             Dashboard
+          </Link>
+          <Link href="/sign-in" className="transition-colors hover:text-foreground">
+            Sign in
           </Link>
           <Link href="/sign-up" className="transition-colors hover:text-foreground">
             Get started
