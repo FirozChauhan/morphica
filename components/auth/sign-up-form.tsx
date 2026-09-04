@@ -127,7 +127,7 @@ export function SignUpForm() {
   }
 
   return (
-    <div className="auth-card flex w-[30rem] max-w-full min-h-[28rem] flex-col border border-border p-6 text-white">
+    <div className="flex w-[30rem] max-w-full min-h-[26rem] flex-col rounded-md border border-border bg-background p-6">
       <h1 className="text-lg font-semibold">Create your account</h1>
       <p className="mt-1 text-sm text-muted-foreground">
         {step === "form"
@@ -158,7 +158,7 @@ export function SignUpForm() {
                 placeholder="e.g. Firoz Khan Chauhan"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                className="h-12 border-white/20 bg-transparent text-white shadow-none placeholder:text-white/40 focus-visible:border-white/60 focus-visible:ring-0"
+                className="h-10 rounded-[4px] border-border bg-surface px-3 shadow-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-0"
               />
             </label>
             <label className="block space-y-1.5">
@@ -171,7 +171,7 @@ export function SignUpForm() {
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="h-12 border-white/20 bg-transparent text-white shadow-none placeholder:text-white/40 focus-visible:border-white/60 focus-visible:ring-0"
+                className="h-10 rounded-[4px] border-border bg-surface px-3 shadow-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-0"
               />
             </label>
             <label className="block space-y-1.5">
@@ -185,7 +185,7 @@ export function SignUpForm() {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="h-12 border-white/20 bg-transparent text-white shadow-none placeholder:text-white/40 focus-visible:border-white/60 focus-visible:ring-0"
+                className="h-10 rounded-[4px] border-border bg-surface px-3 shadow-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-0"
               />
             </label>
 
@@ -194,7 +194,7 @@ export function SignUpForm() {
             <Button
               type="submit"
               disabled={loading || !signUp}
-              className="mt-auto h-12 w-full gap-1.5 bg-white text-black hover:bg-white/90"
+              className="mt-auto h-10 w-full gap-1.5 rounded-[4px] bg-primary font-medium text-primary-foreground hover:bg-accent hover:text-accent-foreground"
             >
               {loading ? <Loader2 className="animate-spin" /> : null}
               Create account
@@ -218,12 +218,12 @@ export function SignUpForm() {
               placeholder="6-digit code"
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              className="h-12 border-white/20 bg-transparent text-white shadow-none placeholder:text-white/40 focus-visible:border-white/60 focus-visible:ring-0"
+              className="h-10 rounded-[4px] border-border bg-surface px-3 shadow-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-0"
             />
           </label>
 
           <p className="text-xs text-muted-foreground">
-            Your username is <span className="text-white">{username}</span> —
+            Your username is <span className="text-foreground">{username}</span> —
             keep it to sign in.
           </p>
 
@@ -232,7 +232,7 @@ export function SignUpForm() {
           <Button
             type="submit"
             disabled={loading || !signUp}
-            className="mt-auto h-12 w-full gap-1.5 bg-white text-black hover:bg-white/90"
+            className="mt-auto h-10 w-full gap-1.5 rounded-[4px] bg-primary font-medium text-primary-foreground hover:bg-accent hover:text-accent-foreground"
           >
             {loading ? <Loader2 className="animate-spin" /> : null}
             Verify &amp; continue

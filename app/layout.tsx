@@ -1,21 +1,15 @@
 import type { Metadata } from "next";
-import { Archivo_Black, Aref_Ruqaa, Inter } from "next/font/google";
+import { Aref_Ruqaa, IBM_Plex_Mono } from "next/font/google";
 
 import { ClerkProvider } from "@/components/clerk-provider";
 import { Signature } from "@/components/signature";
 
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
-  preload: false,
-});
-
-const archivoBlack = Archivo_Black({
-  variable: "--font-archivo",
-  subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
   preload: false,
 });
 
@@ -36,7 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`dark ${inter.variable} ${archivoBlack.variable} ${arefRuqaa.variable} h-full antialiased`}
+      className={`dark ${plexMono.variable} ${arefRuqaa.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <ClerkProvider>{children}</ClerkProvider>

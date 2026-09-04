@@ -10,7 +10,7 @@ export function SignUpNav() {
     <Button
       size="sm"
       variant="outline"
-      className="h-9 border-white/40 bg-transparent px-6 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:text-white"
+      className="h-8 rounded-[4px] border-border bg-transparent px-4 text-xs font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
       onClick={() => router.push("/sign-up")}
     >
       Sign up
@@ -24,7 +24,7 @@ export function SignInNav() {
     <Button
       size="sm"
       variant="outline"
-      className="h-9 border-white/40 bg-transparent px-6 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:text-white"
+      className="h-8 rounded-[4px] border-border bg-transparent px-4 text-xs font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
       onClick={() => router.push("/sign-in")}
     >
       Sign in

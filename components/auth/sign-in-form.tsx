@@ -75,7 +75,7 @@ export function SignInForm() {
   }
 
   return (
-    <div className="auth-card flex w-[30rem] max-w-full min-h-[28rem] flex-col border border-border p-6 text-white">
+    <div className="flex w-[30rem] max-w-full min-h-[26rem] flex-col rounded-md border border-border bg-background p-6">
       <h1 className="text-lg font-semibold">Welcome back</h1>
       <p className="mt-1 text-sm text-muted-foreground">
         Sign in to your account.
@@ -103,7 +103,7 @@ export function SignInForm() {
               placeholder="you@example.com"
               value={identifier}
               onChange={(e) => setIdentifier(e.target.value)}
-              className="h-12 border-white/20 bg-transparent text-white shadow-none placeholder:text-white/40 focus-visible:border-white/60 focus-visible:ring-0"
+              className="h-10 rounded-[4px] border-border bg-surface px-3 shadow-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-0"
             />
           </label>
           <label className="block space-y-1.5">
@@ -116,7 +116,7 @@ export function SignInForm() {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="h-12 border-white/20 bg-transparent text-white shadow-none placeholder:text-white/40 focus-visible:border-white/60 focus-visible:ring-0"
+              className="h-10 rounded-[4px] border-border bg-surface px-3 shadow-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-0"
             />
           </label>
 
@@ -125,7 +125,7 @@ export function SignInForm() {
           <Button
             type="submit"
             disabled={loading || !signIn}
-            className="mt-auto h-12 w-full gap-1.5 bg-white text-black hover:bg-white/90"
+            className="mt-auto h-10 w-full gap-1.5 rounded-[4px] bg-primary font-medium text-primary-foreground hover:bg-accent hover:text-accent-foreground"
           >
             {loading ? <Loader2 className="animate-spin" /> : null}
             Sign in

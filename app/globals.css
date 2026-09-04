@@ -7,10 +7,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-inter);
-  --font-display: var(--font-archivo);
+  --font-sans: var(--font-mono);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-mono);
+  --font-display: var(--font-mono);
   --font-ruqaa: var(--font-aref-ruqaa);
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
@@ -43,6 +43,8 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -52,75 +54,85 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* Light theme — mirrors the opencode light palette. */
 :root {
-  --background: oklch(0.984 0.003 247.858);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.145 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.527 0.262 276.5);
-  --brand: oklch(0.527 0.262 276.5);
-  --brand-foreground: oklch(0.985 0 0);
-  --chart-1: oklch(0.527 0.262 276.5);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0;
-  --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.145 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.145 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.527 0.262 276.5);
+  --background: #ffffff;
+  --foreground: #1d1d1f;
+  --card: #ffffff;
+  --card-foreground: #1d1d1f;
+  --surface: #f5f5f7;
+  --elevated: #ffffff;
+  --popover: #ffffff;
+  --popover-foreground: #1d1d1f;
+  --primary: #1a1817;
+  --primary-foreground: #faf8f7;
+  --secondary: #f5f5f7;
+  --secondary-foreground: #1d1d1f;
+  --muted: #f5f5f7;
+  --muted-foreground: #6e6e73;
+  --accent: #f0eeed;
+  --accent-foreground: #1d1d1f;
+  --destructive: #ff3b30;
+  --border: #d9d5d4;
+  --input: #d9d5d4;
+  --ring: #a1a1a6;
+  --brand: #f2eded;
+  --brand-foreground: #131010;
+  --chart-1: #007aff;
+  --chart-2: #6e6e73;
+  --chart-3: #424245;
+  --chart-4: #2c2c2e;
+  --chart-5: #1d1d1f;
+  --radius: 0.375rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1d1d1f;
+  --sidebar-primary: #1a1817;
+  --sidebar-primary-foreground: #faf8f7;
+  --sidebar-accent: #f0eeed;
+  --sidebar-accent-foreground: #1d1d1f;
+  --sidebar-border: #d9d5d4;
+  --sidebar-ring: #a1a1a6;
 }
 
+/* Dark theme — the default (html.dark), mirrors the opencode warm-dark
+   palette sampled from their landing/docs: bg #131010, surface #1B1818,
+   elevated #242020, text #F2EDED, border #3D3838. */
 .dark {
-  --background: oklch(0.12 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.17 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.17 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.12 0 0);
-  --secondary: oklch(0.19 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.19 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.19 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.12 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.19 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 12%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #131010;
+  --foreground: #f2eded;
+  --card: #131010;
+  --card-foreground: #f2eded;
+  --surface: #1b1818;
+  --elevated: #242020;
+  --popover: #1b1818;
+  --popover-foreground: #f2eded;
+  --primary: #f2eded;
+  --primary-foreground: #131010;
+  --secondary: #1b1818;
+  --secondary-foreground: #f2eded;
+  --muted: #1b1818;
+  --muted-foreground: #7f7a7a;
+  --accent: #242020;
+  --accent-foreground: #f2eded;
+  --destructive: #ff453a;
+  --border: #3d3838;
+  --input: #3d3838;
+  --ring: #a8a2a0;
+  --brand: #131010;
+  --brand-foreground: #f2eded;
+  --chart-1: #4a9eff;
+  --chart-2: #7f7a7a;
+  --chart-3: #b8b2b2;
+  --chart-4: #4a4545;
+  --chart-5: #242020;
+  --sidebar: #131010;
+  --sidebar-foreground: #f2eded;
+  --sidebar-primary: #f2eded;
+  --sidebar-primary-foreground: #131010;
+  --sidebar-accent: #242020;
+  --sidebar-accent-foreground: #f2eded;
+  --sidebar-border: #3d3838;
+  --sidebar-ring: #a8a2a0;
 }
 
 @layer base {
@@ -129,6 +141,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-mono), "Berkeley Mono", "IBM Plex Mono", ui-monospace,
+      SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
   html {
     @apply font-sans;
@@ -157,9 +171,8 @@
   *::-webkit-scrollbar-thumb:hover {
     background-color: color-mix(in srgb, var(--foreground) 30%, transparent);
   }
-  /* Brand-tinted text selection. */
   ::selection {
-    background-color: color-mix(in srgb, var(--brand) 35%, transparent);
+    background-color: color-mix(in srgb, var(--foreground) 22%, transparent);
     color: var(--foreground);
   }
   html {
@@ -171,95 +184,11 @@
   .font-ruqaa {
     font-family: var(--font-ruqaa), "Noto Nastaliq Urdu", serif;
   }
-  .bg-app {
-    background-color: var(--background);
-    background-image:
-      radial-gradient(
-        52rem 48rem at 12% -8%,
-        color-mix(in srgb, var(--brand) 15%, transparent),
-        transparent 62%
-      ),
-      radial-gradient(
-        48rem 44rem at 100% 115%,
-        color-mix(in srgb, #3b82f6 12%, transparent),
-        transparent 62%
-      ),
-      linear-gradient(
-        color-mix(in srgb, var(--foreground) 4%, transparent) 1px,
-        transparent 1px
-      ),
-      linear-gradient(
-        90deg,
-        color-mix(in srgb, var(--foreground) 4%, transparent) 1px,
-        transparent 1px
-      );
-    background-size: auto, auto, 44px 44px, 44px 44px;
-  }
-  .dark .bg-app {
-    background-image:
-      radial-gradient(
-        62rem 58rem at 6% -12%,
-        color-mix(in srgb, var(--brand) 32%, transparent),
-        transparent 60%
-      ),
-      radial-gradient(
-        56rem 52rem at 110% 120%,
-        color-mix(in srgb, #4f46e5 28%, transparent),
-        transparent 62%
-      ),
-      radial-gradient(
-        46rem 42rem at 62% -35%,
-        color-mix(in srgb, #a855f7 24%, transparent),
-        transparent 65%
-      ),
-      linear-gradient(
-        color-mix(in srgb, var(--foreground) 4%, transparent) 1px,
-        transparent 1px
-      ),
-      linear-gradient(
-        90deg,
-        color-mix(in srgb, var(--foreground) 4%, transparent) 1px,
-        transparent 1px
-      );
-    background-size: auto, auto, auto, 44px 44px, 44px 44px;
-  }
-  .bg-side {
-    background-color: var(--background);
-    background-image:
-      radial-gradient(
-        28rem 42rem at 7% -6%,
-        color-mix(in srgb, var(--brand) 12%, transparent),
-        transparent 64%
-      ),
-      radial-gradient(
-        28rem 42rem at 93% -6%,
-        color-mix(in srgb, var(--brand) 12%, transparent),
-        transparent 64%
-      );
-  }
-  .bg-dash {
-    background-color: var(--background);
-    background-image:
-      radial-gradient(
-        58rem 44rem at 104% -12%,
-        color-mix(in srgb, var(--brand) 16%, transparent),
-        transparent 62%
-      ),
-      radial-gradient(
-        46rem 38rem at -6% 112%,
-        color-mix(in srgb, #4f46e5 12%, transparent),
-        transparent 62%
-      ),
-      linear-gradient(
-        color-mix(in srgb, var(--foreground) 5%, transparent) 1px,
-        transparent 1px
-      ),
-      linear-gradient(
-        90deg,
-        color-mix(in srgb, var(--foreground) 5%, transparent) 1px,
-        transparent 1px
-      );
-    background-size: auto, auto, 48px 48px, 48px 48px;
+
+  .text-muted-underline {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--muted-foreground);
   }
 
   .no-spinner {
@@ -271,22 +200,9 @@
     -webkit-appearance: none;
     margin: 0;
   }
-
-  .auth-card {
-    background-image:
-      radial-gradient(
-        120% 55% at 50% 0%,
-        color-mix(in srgb, var(--brand) 7%, transparent),
-        transparent 62%
-      ),
-      linear-gradient(180deg, #141419 0%, #0b0b0d 100%);
-  }
 }
 
-/* View transitions — smooth crossfade + subtle slide on every route change.
-   The old page fades out quickly, the new page fades in with a gentle upward
-   movement. This makes auth → dashboard and between dashboard pages feel
-   polished and production-ready. */
+/* View transitions — smooth crossfade + subtle slide on every route change. */
 ::view-transition-old(root) {
   animation: vt-exit 150ms ease-in both;
 }

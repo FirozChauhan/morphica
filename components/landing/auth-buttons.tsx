@@ -9,7 +9,7 @@ export function SignUpButton() {
   return (
     <Button
       size="lg"
-      className="h-12 bg-brand px-8 text-sm text-white hover:bg-brand/90"
+      className="h-10 rounded-[4px] bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-accent hover:text-accent-foreground"
       onClick={() => redirectToSignUp({ redirectUrl: "/dashboard" })}
     >
       Sign up
@@ -24,14 +24,13 @@ export function GetStartedButton() {
   return (
     <Button
       size="lg"
-      className="group relative h-12 animate-in overflow-hidden bg-brand px-10 text-sm text-white slide-in-from-bottom-3 fade-in-0 duration-500 ease-out hover:bg-brand/90 hover:shadow-[0_8px_30px_-6px_color-mix(in_srgb,var(--brand)_50%,transparent)]"
+      className="group h-10 rounded-[4px] bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
       onClick={() => redirectToSignUp({ redirectUrl: "/dashboard" })}
     >
-      <span className="relative z-10 flex items-center gap-2">
+      <span className="flex items-center gap-2">
         Get started
-        <ArrowRight className="size-4 transition-transform duration-300 ease-out group-hover:translate-x-1.5" />
+        <ArrowRight className="size-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
       </span>
-      <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
     </Button>
   );
 }

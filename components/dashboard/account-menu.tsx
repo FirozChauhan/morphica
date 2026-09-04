@@ -49,8 +49,8 @@ export function AccountMenu() {
       {/* Full-page logout overlay: the screen closes in to black and shows the
           wordmark, then signs out. */}
       {loggingOut && (
-        <div className="fixed inset-0 z-[100] flex animate-in items-center justify-center bg-black fade-in-0 duration-500">
-          <Wordmark className="animate-in text-3xl tracking-[0.08em] text-white/80 fade-in-0 zoom-in-95 delay-200 duration-300" />
+        <div className="fixed inset-0 z-[100] flex animate-in items-center justify-center bg-background fade-in-0 duration-300">
+          <Wordmark className="animate-in text-2xl text-muted-foreground fade-in-0 zoom-in-95 delay-100 duration-300" />
         </div>
       )}
 
@@ -68,7 +68,7 @@ export function AccountMenu() {
               className="size-8 shrink-0 rounded-full"
             />
           ) : (
-            <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-brand/15 font-semibold text-brand">
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-[4px] bg-accent font-medium text-foreground">
               {initial}
             </span>
           )}

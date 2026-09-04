@@ -30,7 +30,7 @@ export function LineChart({
   const last = data[data.length - 1]?.date ?? "";
 
   return (
-    <div className="border border-border bg-card p-4">
+    <div className="rounded-md border border-border bg-background p-4">
       <div className="flex items-center justify-between">
         <p className="text-sm font-medium">Requests per day</p>
         <span className="text-xs text-muted-foreground">

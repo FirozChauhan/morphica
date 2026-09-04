@@ -53,12 +53,12 @@ export function UsageView() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Usage</h1>
+        <h1 className="text-[1.375rem] leading-8 font-semibold">Usage</h1>
         <p className="mt-1 text-sm text-muted-foreground">Recent API calls.</p>
       </div>
 
       {failed ? (
-        <div className="border bg-card py-16 text-center">
+        <div className="border border-border bg-background py-16 text-center">
           <p className="text-sm font-medium">Couldn&apos;t load your usage</p>
           <p className="mt-1 text-sm text-muted-foreground">
             Something went wrong while fetching your calls. Try again.
@@ -74,7 +74,7 @@ export function UsageView() {
         </div>
       ) : !data ? (
         showSkeleton ? (
-          <div className="overflow-hidden border bg-card">
+          <div className="overflow-hidden rounded-md border border-border bg-background">
             <Table>
               <TableHeader>
                 <TableRow className="hover:bg-transparent">
@@ -104,7 +104,7 @@ export function UsageView() {
             </Table>
           </div>
         ) : (
-          <div className="overflow-hidden border bg-card">
+          <div className="overflow-hidden rounded-md border border-border bg-background">
             <Table>
               <TableHeader>
                 <TableRow className="hover:bg-transparent">
@@ -125,7 +125,7 @@ export function UsageView() {
           </div>
         )
       ) : data.rows.length === 0 && !data.daily.some((d) => d.count > 0) ? (
-        <div className="border bg-card py-16 text-center">
+        <div className="border border-border bg-background py-16 text-center">
           <p className="text-sm font-medium">No usage yet</p>
           <p className="mt-1 text-sm text-muted-foreground">
             Calls made with your API keys will show up here.
@@ -136,7 +136,7 @@ export function UsageView() {
           {data.daily.some((d) => d.count > 0) && (
             <LineChart data={data.daily} />
           )}
-          <div className="overflow-hidden border bg-card">
+          <div className="overflow-hidden rounded-md border border-border bg-background">
             <Table>
               <TableHeader>
                 <TableRow className="hover:bg-transparent">

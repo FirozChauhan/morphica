@@ -3,6 +3,10 @@
 // Landing-page live demo. Drop/paste an image, pick a width, and watch it go
 // through the real /api/demo endpoint. The result comes back as image bytes,
 // which I turn into a blob URL for preview + download.
+//
+// Styled as the full-bleed "product shot" band of the landing page: a
+// surface-colored section framed by the page's horizontal rules, with the
+// interactive card centered inside it.
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
@@ -154,20 +158,17 @@ export function Demo() {
   }
 
   return (
-    <div
-      className="w-full max-w-[24rem] border border-white/10 bg-black p-6 text-white shadow-2xl"
-      onPaste={handlePaste}
-    >
-      <div className="mb-6 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-sm font-medium tracking-wide text-white/80">
-          <Sparkles className="size-4 text-white/70" />
+    <div className="flex flex-col items-center gap-6 border-t border-border bg-surface px-6 py-14 max-md:py-10">
+      <div className="flex w-full max-w-md items-center justify-between">
+        <div className="flex items-center gap-2 text-sm text-secondary-foreground">
+          <Sparkles className="size-4 text-muted-foreground" />
           Live demo
         </div>
         {sourceUrl && !result && (
           <button
             type="button"
             onClick={reset}
-            className="flex cursor-pointer items-center gap-1 text-xs text-white/50 transition-colors hover:text-white"
+            className="flex cursor-pointer items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
             <RotateCcw className="size-3" />
             Reset
@@ -176,8 +177,8 @@ export function Demo() {
       </div>
 
       {result ? (
-        <div className="animate-in fade-in-0 zoom-in-95 duration-300 ease-out">
-          <div className="flex h-56 items-center justify-center border border-white/10 bg-white/[0.03]">
+        <div className="w-full max-w-md animate-in fade-in-0 zoom-in-95 duration-300 ease-out">
+          <div className="flex h-56 items-center justify-center rounded-md border border-border bg-elevated">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={result.url}
@@ -187,7 +188,7 @@ export function Demo() {
           </div>
           <Button
             asChild
-            className="mt-3 w-full gap-1.5 bg-white text-black transition-all hover:bg-white/90"
+            className="mt-3 w-full gap-1.5 rounded-[4px] bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground"
           >
             <a
               href={result.url}
@@ -199,7 +200,7 @@ export function Demo() {
           </Button>
         </div>
       ) : (
-        <div className="flex flex-col">
+        <div className="flex w-full max-w-md flex-col">
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
@@ -209,10 +210,10 @@ export function Demo() {
             }}
             onDragLeave={() => setDragging(false)}
             onDrop={handleDrop}
-            className={`flex h-40 w-full cursor-pointer flex-col items-center justify-center gap-2 border border-dashed text-sm text-white/60 transition-all duration-200 ${
+            className={`flex h-44 w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-dashed text-sm text-muted-foreground transition-all duration-200 ${
               dragging
-                ? "border-white bg-white/10 text-white"
-                : "border-white/20 hover:border-white/60 hover:bg-white/5"
+                ? "border-foreground bg-accent text-foreground"
+                : "border-border hover:border-ring hover:bg-accent/60"
             }`}
           >
             {sourceUrl ? (
@@ -220,7 +221,7 @@ export function Demo() {
               <img
                 src={sourceUrl}
                 alt="Source preview"
-                className="max-h-32 max-w-full object-contain"
+                className="max-h-36 max-w-full object-contain"
               />
             ) : (
               <>
@@ -245,20 +246,20 @@ export function Demo() {
             placeholder="Width (px)"
             value={width}
             onChange={(e) => setWidth(e.target.value)}
-            className="no-spinner mb-4 mt-4 h-10 w-full border-white/20 bg-transparent text-white shadow-none placeholder:text-white/40 focus-visible:border-white/60 focus-visible:ring-0"
+            className="no-spinner mt-4 mb-4 h-11 w-full rounded-[4px] border-border bg-elevated px-3 shadow-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-0"
           />
 
           <Button
             onClick={handleProcess}
             disabled={loading || !file}
-            className="h-11 w-full gap-1.5 bg-white text-black transition-all hover:bg-white/90 disabled:opacity-40"
+            className="h-11 w-full gap-1.5 rounded-[4px] bg-primary text-primary-foreground transition-colors hover:bg-accent hover:text-accent-foreground disabled:opacity-40"
           >
             {loading && <Loader2 className="animate-spin" />}
             {loading ? "Processing…" : "Process"}
           </Button>
 
           {error && (
-            <p className="mt-3 text-xs font-medium text-red-400">{error}</p>
+            <p className="mt-3 text-xs font-medium text-destructive">{error}</p>
           )}
         </div>
       )}

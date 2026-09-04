@@ -33,12 +33,15 @@ const items = [
   },
 ];
 
+// Sidebar nav in the opencode style: quiet mono text, small square icon
+// glyphs, hairline separator per row, active row marked by an accent
+// background block (no rounded pills, no color fills).
 export function DashboardNav() {
   const pathname = usePathname();
 
   return (
     // Horizontal, swipeable row on mobile; the vertical sidebar column on md+.
-    <nav className="flex items-center gap-1 overflow-x-auto px-4 py-2 md:flex-1 md:flex-col md:items-stretch md:gap-0.5 md:overflow-y-auto md:p-3">
+    <nav className="flex items-center gap-1 overflow-x-auto px-3 py-2 md:flex-1 md:flex-col md:items-stretch md:gap-0 md:overflow-y-auto md:py-3">
       {items.map((item) => {
         const active = pathname === item.href;
         const Icon = item.icon;
@@ -46,14 +49,15 @@ export function DashboardNav() {
           <Link
             key={item.href}
             href={item.href}
+            aria-current={active ? "page" : undefined}
             className={cn(
-              "flex shrink-0 items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-sm font-medium whitespace-nowrap transition-colors",
+              "flex shrink-0 items-center gap-3 border-b border-transparent px-3 py-2.5 text-sm whitespace-nowrap transition-colors max-md:border-b-0 max-md:rounded-[4px]",
               active
-                ? "bg-brand/10 text-brand"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                ? "bg-accent font-medium text-foreground"
+                : "text-muted-foreground hover:bg-accent hover:text-foreground",
             )}
           >
-            <Icon className="size-4" />
+            <Icon className="size-4 shrink-0" />
             {item.label}
           </Link>
         );

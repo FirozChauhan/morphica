@@ -12,7 +12,7 @@ export default async function SignUpPage() {
   if (userId) redirect("/dashboard");
 
   return (
-    <main className="flex min-h-dvh flex-col bg-app">
+    <main className="flex min-h-dvh flex-col bg-background">
       <AuthHeader />
       <div className="flex flex-1 items-center justify-center px-4 py-10">
         <ClerkLoaded>

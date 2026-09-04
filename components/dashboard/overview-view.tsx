@@ -5,12 +5,6 @@
 // between dashboard tabs feels snappy, and cachedFetch keeps re-visits fast.
 import { Activity, ArrowDownRight, Image } from "lucide-react";
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDelayedSkeleton } from "@/hooks/use-delayed-skeleton";
@@ -30,12 +24,12 @@ export function OverviewView() {
     return (
       <div className="space-y-8">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Overview</h1>
+          <h1 className="text-[1.375rem] leading-8 font-semibold">Overview</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Usage for the current month.
           </p>
         </div>
-        <div className="border bg-card py-16 text-center">
+        <div className="border border-border bg-background py-16 text-center">
           <p className="text-sm font-medium">Couldn&apos;t load your stats</p>
           <p className="mt-1 text-sm text-muted-foreground">
             Something went wrong while fetching your usage. Try again.
@@ -69,26 +63,22 @@ export function OverviewView() {
     return (
       <div className="space-y-8">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Overview</h1>
+          <h1 className="text-[1.375rem] leading-8 font-semibold">Overview</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Usage for the current month.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-px border border-border bg-border sm:grid-cols-3">
           {[0, 1, 2].map((i) => (
-            <Card key={i}>
-              <CardContent className="pt-6">
-                <Skeleton className="h-8 w-24" />
-                <Skeleton className="mt-2 h-8 w-32" />
-              </CardContent>
-            </Card>
+            <div key={i} className="bg-background p-6">
+              <Skeleton className="h-8 w-24" />
+              <Skeleton className="mt-2 h-8 w-32" />
+            </div>
           ))}
         </div>
-        <Card>
-          <CardContent className="pt-6">
-            <Skeleton className="h-44 w-full" />
-          </CardContent>
-        </Card>
+        <div className="border border-border bg-background p-6">
+          <Skeleton className="h-44 w-full" />
+        </div>
       </div>
     );
   }
@@ -104,7 +94,7 @@ export function OverviewView() {
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-px border border-border bg-border sm:grid-cols-3">
         <StatCard
           label="Requests this month"
           value={stats.totalRequests.toLocaleString()}
@@ -122,21 +112,21 @@ export function OverviewView() {
         />
       </div>
 
-      <Card>
-        <CardHeader className="flex-row items-center justify-between">
-          <CardTitle className="text-sm font-medium">
+      <div className="border border-border bg-background">
+        <div className="flex flex-row items-center justify-between border-b border-border px-4 py-3">
+          <h2 className="text-sm font-medium">
             Requests per day
-          </CardTitle>
+          </h2>
           <span className="text-xs text-muted-foreground">Last 30 days</span>
-        </CardHeader>
-        <CardContent>
+        </div>
+        <div className="p-4">
           {stats.daily.some((d) => d.count > 0) ? (
             <div className="flex h-44 items-end gap-[3px]">
               {stats.daily.map((d) => (
                 <div
                   key={d.date}
                   title={`${d.count} request${d.count === 1 ? "" : "s"}`}
-                  className="flex-1 rounded-sm bg-brand/60 transition-colors hover:bg-brand"
+                  className="flex-1 rounded-[2px] bg-foreground/70 transition-colors hover:bg-foreground"
                   style={{ height: `${Math.max((d.count / max) * 100, 2)}%` }}
                 />
               ))}
@@ -146,8 +136,8 @@ export function OverviewView() {
               No usage yet.
             </p>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
@@ -162,18 +152,14 @@ function StatCard({
   icon: React.ComponentType<{ className?: string }>;
 }) {
   return (
-    <Card className="transition-colors hover:border-foreground/20">
-      <CardHeader className="flex-row items-center gap-2">
-        <span className="flex size-7 items-center justify-center bg-brand/10 text-brand">
+    <div className="bg-background p-6 transition-colors hover:bg-surface">
+      <div className="flex items-center gap-2">
+        <span className="flex size-6 items-center justify-center text-muted-foreground">
           <Icon className="size-4" />
         </span>
-        <CardTitle className="text-sm font-medium text-muted-foreground">
-          {label}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="text-3xl font-semibold tracking-tight">{value}</p>
-      </CardContent>
-    </Card>
+        <figure className="text-xs text-muted-foreground">{label}</figure>
+      </div>
+      <p className="mt-3 text-3xl font-medium tracking-tight">{value}</p>
+    </div>
   );
 }
