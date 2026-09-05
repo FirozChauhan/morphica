@@ -2,107 +2,80 @@
 
 Stateless, serverless image processing — one request, zero persistence.
 
-## Stack
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwindcss&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/Neon_Postgres-316192?logo=postgresql&logoColor=white)
+![Clerk](https://img.shields.io/badge/Clerk-6C47FF?logo=clerk&logoColor=white)
+![Drizzle](https://img.shields.io/badge/Drizzle-C5F7E4?logo=drizzle&logoColor=black)
 
-| Concern | Choice |
-|---|---|
-| Framework | [Next.js](https://nextjs.org) (App Router, TypeScript) |
-| Hosting | [Vercel](https://vercel.com) (free Hobby tier) |
-| Auth | [Clerk](https://clerk.com) (email + password) |
-| Database | [Neon Postgres](https://neon.tech) (pooled connection) |
-| ORM | [drizzle](https://orm.drizzle.team) |
-| Image processing | [sharp](https://sharp.pixelplumbing.com) (in-memory) |
-| UI | [shadcn/ui](https://ui.shadcn.com), Tailwind CSS |
-
-## Getting started
-
-### 1. Set up environment variables
-
-Copy `.env.example` to `.env.local` and fill in the values:
-
-- **Clerk**: Create an app at https://dashboard.clerk.com, copy the publishable key, secret key, and webhook signing secret.
-- **Neon Postgres**: Create a database at https://console.neon.tech, copy the pooled connection string.
-
-### 2. Install dependencies
+## Install
 
 ```bash
+git clone <repo-url> morphica && cd morphica
+cp .env.example .env.local   # fill Clerk + Neon keys
 npm install
-```
-
-### 3. Run database migrations
-
-```bash
 npm run db:migrate
+npm run dev                  # http://localhost:3000
 ```
 
-### 4. Start the dev server
+Then point a Clerk webhook at `https://your-domain/api/webhooks/clerk` (subscribe to `user.created`).
+
+## Usage
 
 ```bash
-npm run dev
+curl -X POST https://morphica.app/api/process \
+  -H "Authorization: Bearer <api_key>" \
+  -F image=@photo.jpg -F op=resize -F width=800
 ```
 
-### 5. Configure Clerk webhook
+Create API keys in the dashboard; processed bytes come back in the response.
 
-In your Clerk dashboard, add a webhook endpoint pointing to:
+## API Reference
 
-```
-https://your-domain.com/api/webhooks/clerk
-```
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| `POST` | `/api/process` | `Bearer <api_key>` | Resize an image (jpeg/png/webp/gif, ≤ 3 MB) |
 
-Select the `user.created` event.
+**Request fields:** `image` (file, required) · `op` (`resize`) · `width` / `height` (int ≥ 1, at least one required)
+**Response:** `200` image bytes, or `400`/`401`/`413`/`415` JSON error.
 
-## API
+## Features
 
-### `POST /api/process`
+- Images processed in memory with sharp — nothing is stored, ever
+- API keys hashed at rest; usage logged asynchronously via `after()`
+- Dashboard: key management + usage stats
 
-Authenticated via `Authorization: Bearer <api_key>`.
+## Environment Variables
 
-**Request:** `multipart/form-data`
-
-| Field | Type | Required | Notes |
-|---|---|---|---|
-| `image` | file | yes | jpeg, png, webp, or gif; ≤ 3 MB |
-| `op` | string | yes | currently only `resize` |
-| `width` | int | no | must be ≥ 1; at least one dimension required |
-| `height` | int | no | must be ≥ 1; at least one dimension required |
-
-**Response:** `200` with processed image bytes, or `400`/`401`/`413`/`415` with JSON error.
-
-## Project structure
-
-```
-proxy.ts                    — Clerk auth (Next.js Proxy)
-app/
-  layout.tsx                — ClerkProvider
-  page.tsx                  — Landing page
-  dashboard/
-    layout.tsx              — Auth guard, nav
-    page.tsx                — Overview stats
-    api-keys/page.tsx       — Key management
-    usage/page.tsx          — Usage table
-  api/
-    process/route.ts        — Image processing
-    demo/route.ts           — Session-authed demo endpoint
-    keys/route.ts           — Create/revoke API keys
-    webhooks/clerk/route.ts — Clerk user sync
-lib/
-  db.ts                     — Neon + drizzle
-  auth.ts                   — Clerk helper
-  keys.ts                   — API key generation/hashing
-  sharp.ts                  — Image pipeline
-  stats.ts                  — Dashboard queries
-  format.ts                 — Formatting utilities
-schema/
-  index.ts                  — Drizzle schema
-migrations/                 — Generated SQL
+```bash
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=   # required
+CLERK_SECRET_KEY=                    # required
+CLERK_WEBHOOK_SECRET=                # required — verify webhooks
+DATABASE_URL=                        # required — Neon pooled connection
+APP_URL=http://localhost:3000
 ```
 
-## Notes
+## Architecture
 
-- Animated GIFs are de-animated (first frame only) via `sharp({ animated: false })`.
-- Usage is logged asynchronously after the response is sent using `after()`.
-- sharp is configured as an external package in `next.config.ts` for the Node.js runtime.
+```mermaid
+flowchart LR
+    User[API client] -->|Bearer key| R[Next.js /api/process]
+    R -->|verify hash| DB[(Neon Postgres)]
+    R -->|in-memory resize| S[sharp]
+    S -->|bytes| User
+    Clerk[Clerk] -->|webhook: user.created| W[/api/webhooks/clerk/] --> DB
+```
 
-## Author
+## Development
 
-**Firoz Khan Chauhan**
+```bash
+npm run build && npm start
+npm run lint
+npm run db:generate   # drizzle-kit
+```
+
+## License
+
+[MIT](LICENSE)
