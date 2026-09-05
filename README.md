@@ -2,13 +2,13 @@
 
 Stateless, serverless image processing — one request, zero persistence.
 
-![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwindcss&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/Neon_Postgres-316192?logo=postgresql&logoColor=white)
-![Clerk](https://img.shields.io/badge/Clerk-6C47FF?logo=clerk&logoColor=white)
-![Drizzle](https://img.shields.io/badge/Drizzle-C5F7E4?logo=drizzle&logoColor=black)
+![Next.js](https://img.shields.io/badge/Next.js-161B22?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-161B22?style=for-the-badge&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-161B22?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-161B22?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Neon Postgres](https://img.shields.io/badge/Neon_Postgres-161B22?style=for-the-badge&logo=postgresql&logoColor=white)
+![Clerk](https://img.shields.io/badge/Clerk-161B22?style=for-the-badge&logo=clerk&logoColor=white)
+![Drizzle](https://img.shields.io/badge/Drizzle-161B22?style=for-the-badge&logo=drizzle&logoColor=white)
 
 ## Install
 
